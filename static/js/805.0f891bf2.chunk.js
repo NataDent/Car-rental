@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[805],{805:(e,t,r)=>{r.r(t),r.d(t,{default:()=>a});var s=r(184);const a=()=>(0,s.jsx)("div",{children:(0,s.jsx)("img",{src:"https://img.freepik.com/free-vector/error-404-concept-illustration_114360-1811.jpg?size=800&ext=jpg&uid=R116879206&ga=GA1.2.491591425.1694955071&semt=ais",alt:"Page not found"})})}}]);
+//# sourceMappingURL=805.0f891bf2.chunk.js.map

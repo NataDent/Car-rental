@@ -8,6 +8,14 @@ const adSlice = createSlice({
     items: [],
     isLoading: false,
     isError: null,
+    page: 1,
+    limit: 12,
+  },
+  reducers: {
+    loadMore: (state, action) => {
+      state.page = action.payload.page;
+      state.limit = action.payload.limit;
+    },
   },
   extraReducers: builder => {
     builder

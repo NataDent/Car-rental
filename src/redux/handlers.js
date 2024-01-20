@@ -1,4 +1,7 @@
-export const handlePending = state => (state.isLoading = true);
+export const handlePending = state => {
+  state.isLoading = true;
+  state.isError = null;
+};
 
 export const handleFulfilled = (state, action) => {
   state.isLoading = false;

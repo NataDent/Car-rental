@@ -25,10 +25,32 @@ export const Navigation = () => {
       >
         Home
       </ChakraLink>
-      <ChakraLink as={NavLink} to="/catalog">
+      <ChakraLink
+        as={NavLink}
+        to="/catalog"
+        fontSize={20}
+        fontWeight="bold"
+        color={linkColor}
+        textDecoration="none"
+        _hover={{ transform: 'scale(1.01)' }}
+        _activeLink={{
+          color: linkColor,
+        }}
+      >
         Catalog
       </ChakraLink>
-      <ChakraLink as={NavLink} to="/favorites">
+      <ChakraLink
+        as={NavLink}
+        to="/favorites"
+        fontSize={20}
+        fontWeight="bold"
+        color={linkColor}
+        textDecoration="none"
+        _hover={{ transform: 'scale(1.01)' }}
+        _activeLink={{
+          color: linkColor,
+        }}
+      >
         Favorites
       </ChakraLink>
     </HStack>

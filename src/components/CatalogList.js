@@ -19,7 +19,6 @@ export const CatalogList = () => {
         console.error('Error fetching adverts:', error);
       });
   }, [dispatch, page]);
-  console.log('Rendering CatalogList:', adverts);
 
   const handleLoadMore = () => {
     dispatch(setPage({ page: page + 1, limit: 12 }));
@@ -33,22 +32,19 @@ export const CatalogList = () => {
       px={5}
       maxW="50%"
       mx="auto"
-      style={{ listStyle: 'none', padding: 0 }}
     >
-      {adverts &&
-        adverts.length > 0 &&
-        adverts.map(advert => (
-          <CatalogEl
-            key={advert.id}
-            id={advert.id}
-            img={advert.img}
-            make={advert.make}
-            model={advert.model}
-            year={advert.year}
-            rentalPrice={advert.rentalPrice}
-          />
-        ))}
-      {adverts.length >= 12 && !isLoading && (
+      {adverts.map(advert => (
+        <CatalogEl
+          key={advert.id}
+          id={advert.id}
+          img={advert.img}
+          make={advert.make}
+          model={advert.model}
+          year={advert.year}
+          rentalPrice={advert.rentalPrice}
+        />
+      ))}
+      {adverts.length > 0 && !isLoading && adverts.length >= 12 && (
         <Button onClick={handleLoadMore}>Load more</Button>
       )}
     </UnorderedList>

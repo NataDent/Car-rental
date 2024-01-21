@@ -7,6 +7,8 @@ const Catalog = () => {
     <Box>
       <Filter />
       <CatalogList />
+
+      {/* <CatalogEl /> */}
     </Box>
   );
 };

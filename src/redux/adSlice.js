@@ -12,9 +12,8 @@ const adSlice = createSlice({
     limit: 12,
   },
   reducers: {
-    loadMore: (state, action) => {
-      state.page = action.payload.page;
-      state.limit = action.payload.limit;
+    setPage: (state, action) => {
+      state.page = action.payload;
     },
   },
   extraReducers: builder => {
@@ -26,3 +25,4 @@ const adSlice = createSlice({
 });
 
 export const advertsReducer = adSlice.reducer;
+export const { setPage } = adSlice.actions;

@@ -1,5 +1,9 @@
 import { useSelector } from 'react-redux';
-import { selectAdverts, selectIsError, selectIsLoading } from 'redux/selectors';
+import {
+  selectAdverts,
+  selectIsError,
+  selectIsLoading,
+} from '../redux/selectors.js';
 
 export const useAds = () => {
   return {

@@ -3,10 +3,10 @@ export const handlePending = state => {
   state.isError = null;
 };
 
-export const handleFulfilled = (state, action) => {
+export const handleFulfilled = (state, { payload }) => {
   state.isLoading = false;
   state.isError = null;
-  state.adverts = action.payload;
+  state.adverts = [...state.adverts, ...payload];
 };
 
 export const handleRejected = (state, action) => {

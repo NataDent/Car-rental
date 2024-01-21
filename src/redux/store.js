@@ -8,14 +8,10 @@ import {
   PURGE,
   REGISTER,
 } from 'redux-persist';
-import { advertsReducer } from './adSlice';
-import { filterReducer } from './filterSlice';
+import { rootReducer } from './rootReducer';
 
 export const store = configureStore({
-  reducer: {
-    adverts: advertsReducer,
-    filter: filterReducer,
-  },
+  reducer: rootReducer,
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {

@@ -9,7 +9,6 @@ export const Header = () => {
       display="flex"
       justifyContent="center"
       align-items="center"
-      mb={10}
       p={2}
       zIndex="2"
     >

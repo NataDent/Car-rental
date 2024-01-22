@@ -1,99 +1,122 @@
 import {
-  Box,
   Button,
   Card,
   CardBody,
   CardFooter,
+  CardHeader,
+  Checkbox,
   HStack,
   Heading,
   Image,
+  ListItem,
+  StackDivider,
   Text,
 } from '@chakra-ui/react';
-import { HeartIcon } from './HeartIcon';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { toggleLikedAd } from '../redux/favoritesSlice';
+import { FaHeart, FaRegHeart } from 'react-icons/fa';
 import { ModalWindow } from './Modal';
+import { selectIsLoading, selectfavorites } from '../redux/selectors';
+import { addFavorite, removeFavorite } from '../redux/favoritesSlice';
 
 export const CatalogEl = ({ advert }) => {
+  const {
+    id,
+    year,
+    make,
+    model,
+    type,
+    img,
+    photoLink,
+    functionalities,
+    rentalPrice,
+    rentalCompany,
+    address,
+    mileage,
+  } = advert;
   const dispatch = useDispatch();
-  const isAdLiked = useSelector(state =>
-    state.favorites.likedAds.includes(advert.id)
-  );
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const isLoading = useSelector(selectIsLoading);
+  const favorites = useSelector(selectfavorites);
+  const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
-    if (isModalOpen) {
-      document.body.style.overflow = 'hidden';
+    const likedAdvert = favorites.some(favorite => favorite.id === id);
+    setIsLiked(likedAdvert);
+  }, [favorites, id]);
+
+  const handleCheckbox = () => {
+    if (isLiked) {
+      dispatch(removeFavorite({ advert }));
     } else {
-      document.body.style.overflow = 'auto';
+      dispatch(addFavorite({ advert }));
     }
-
-    return () => {
-      document.body.style.overflow = 'auto'; // Восстанавливаем overflow при размонтировании
-    };
-  }, [isModalOpen]);
-  const handleHeartToggle = () => {
-    dispatch(toggleLikedAd(advert.id));
   };
 
-  const handleLearnMoreClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
+  const [isOpen, setIsOpen] = useState(false);
+  const onOpen = () => setIsOpen(true);
+  const onClose = () => setIsOpen(false);
 
   return (
-    <Card
-      key={advert.id}
+    <ListItem
       style={{
         position: 'relative',
         height: '426px',
       }}
     >
-      <HeartIcon
-        adId={advert.id}
-        onToggle={handleHeartToggle}
-        isLiked={isAdLiked}
-      />
-
-      <CardBody>
-        <Box>
+      <Card>
+        <CardHeader>
+          <Checkbox
+            ariaLabel="isFavorite"
+            border="none"
+            checked={isLiked}
+            onChange={() => handleCheckbox()}
+          >
+            {isLiked ? (
+              <FaHeart color="#3470FF" />
+            ) : (
+              <FaRegHeart color="rgba(255, 255, 255, 0.80)" />
+            )}
+          </Checkbox>
           <Image
-            src={advert.img}
-            alt={advert.make}
+            src={img || photoLink}
+            alt={make}
             style={{ maxWidth: '100%', height: '100%', objectFit: 'cover' }}
           />
-        </Box>
+        </CardHeader>
 
-        <Box>
+        <CardBody>
           <HStack>
             <Heading>
-              {advert.make}
+              {make}
               <Text as="span" color="blue">
-                {advert.model}
+                {model}
               </Text>
-              ,{advert.year}
+              ,{year}
             </Heading>
-            <Text>{advert.rentalPrice}</Text>
+            <Text>{rentalPrice}</Text>
           </HStack>
-        </Box>
-        <HStack>
-          <Text>
-            {advert.address && advert.address.split(',').slice(-2).join(', ')}
-            {advert.rentalCompany}| {advert.type}|{advert.id}|{' '}
-            {advert.accessories && advert.accessories[0]}
-          </Text>
-        </HStack>
-      </CardBody>
-      <CardFooter>
-        <Button onClick={handleLearnMoreClick}>Learn more</Button>
-      </CardFooter>
-      {isModalOpen && (
-        <ModalWindow onClose={handleModalClose} advert={advert} />
-      )}
-    </Card>
+
+          <HStack divider={<StackDivider />}>
+            <Text>{address.split(',')[1]}</Text>
+            <Text>{address.split(',')[2]}</Text>
+            <Text>{rentalCompany}</Text>
+            <Text>{id}</Text>
+            <Text>{type}</Text>
+            <Text>{model}</Text>
+            <Text>{mileage}</Text>
+            <Text>{functionalities[0]}</Text>
+          </HStack>
+        </CardBody>
+
+        <CardFooter>
+          <Button aria-label="LearnMore" disabled={isLoading} onClick={onOpen}>
+            Learn more
+          </Button>
+        </CardFooter>
+        {isOpen && (
+          <ModalWindow onOpen={onOpen} onClose={onClose} advert={advert} />
+        )}
+      </Card>
+    </ListItem>
   );
 };

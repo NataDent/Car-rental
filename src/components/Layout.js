@@ -37,9 +37,11 @@ export const Layout = () => {
         zIndex="1"
       >
         <Header />
-        <Suspense fallback={<Text>Loading...</Text>}>
-          <Outlet />
-        </Suspense>
+        <main>
+          <Suspense fallback={<Text>Loading...</Text>}>
+            <Outlet />
+          </Suspense>
+        </main>
         <ToastContainer position="top-right" reverseOrder={false} />
       </Box>
     </Box>

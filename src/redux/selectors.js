@@ -12,7 +12,7 @@ export const selectIsError = state => state.adverts.isError;
 
 export const selectFilter = state => state.filter.selectedBrand;
 
-export const selectLiked = state => state.favorites.likedAds;
+export const selectfavorites = state => state.favorites.items;
 
 export const selectFilteredAds = createSelector(
   [selectAdverts, selectFilter],

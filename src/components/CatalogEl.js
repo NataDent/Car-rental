@@ -1,9 +1,9 @@
 import {
+  Box,
   Button,
   Card,
   CardBody,
   CardFooter,
-  CardHeader,
   Checkbox,
   HStack,
   Heading,
@@ -62,11 +62,12 @@ export const CatalogEl = ({ advert }) => {
         position: 'relative',
         height: '426px',
       }}
+      w="274px"
     >
-      <Card>
-        <CardHeader>
+      <Card position="relative" w="274px" h="268px" mb="14px">
+        <Box>
           <Checkbox
-            ariaLabel="isFavorite"
+            aria-label="isFavorite"
             border="none"
             checked={isLiked}
             onChange={() => handleCheckbox()}
@@ -82,11 +83,11 @@ export const CatalogEl = ({ advert }) => {
             alt={make}
             style={{ maxWidth: '100%', height: '100%', objectFit: 'cover' }}
           />
-        </CardHeader>
+        </Box>
 
         <CardBody>
           <HStack>
-            <Heading>
+            <Heading as="h5" size="s">
               {make}
               <Text as="span" color="blue">
                 {model}

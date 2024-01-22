@@ -1,17 +1,19 @@
 import { Box, Text } from '@chakra-ui/react';
 import { Header } from './Header';
 import { Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 export const Layout = () => {
   const backgroundImageUrl =
     'https://cdn.pixabay.com/photo/2017/03/05/15/29/aston-martin-2118857_640.jpg';
 
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   return (
     <Box
       position="relative"
-      bg={`url('${backgroundImageUrl}')`}
+      bg={isHome ? `url('${backgroundImageUrl}')` : 'transparent'}
       bgSize="cover"
       bgPosition="center"
       h="100vh"

@@ -9,11 +9,10 @@ export const CatalogList = () => {
   return (
     <UnorderedList
       display="flex"
-      flexDirection="column"
-      mt={5}
-      px={5}
-      maxW="50%"
-      mx="auto"
+      flexWrap=" wrap"
+      justifyContent="center"
+      gap="50px 29px"
+      m="0 auto 100px"
     >
       {adverts.map(advert => (
         <CatalogEl key={advert.id} advert={advert} />
